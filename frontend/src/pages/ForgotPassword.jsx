@@ -13,13 +13,13 @@ function ForgotPassword() {
   const [err,setErr]=useState("")
   const navigate=useNavigate()
 const [loading,setLoading]=useState(false)
-  const handleSendOtp=async () => {
+  const handleSendOtp=async () => { //frontend main fetch karne ke liye
     setLoading(true)
     try {
       const result=await axios.post(`${serverUrl}/api/auth/send-otp`,{email},{withCredentials:true})
       console.log(result)
       setErr("")
-      setStep(2)
+      setStep(2) // second step par pohoch jayenge
       setLoading(false)
     } catch (error) {
        setErr(error.response.data.message)

@@ -1,10 +1,10 @@
 import multer from "multer"
 const storage=multer.diskStorage({
    destination:(req,file,cb)=>{
-    cb(null,"./public")
+    cb(null,"./public") // public folder ke under rakhenge image wagera
    },
    filename:(req,file,cb)=>{
-    cb(null,file.originalname)
+    cb(null,file.originalname)//multer image ko file ke under daal deta hai
    }
 })
 

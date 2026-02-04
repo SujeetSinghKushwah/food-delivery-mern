@@ -13,10 +13,10 @@ export const signUp=async (req,res) => {
             return res.status(400).json({message:"password must be at least 6 characters."})
         }
         if(mobile.length<10){
-            return res.status(400).json({message:"mobile no must be at least 10 digits."})
+            return res.status(400).json({message:"mobile no must be at least 10 digits."}) // error from frontend so 400
         }
      
-        const hashedPassword=await bcrypt.hash(password,10)
+        const hashedPassword=await bcrypt.hash(password,10) // hash karke store karayenge safety ke liye
         user=await User.create({
             fullName,
             email,
@@ -25,18 +25,18 @@ export const signUp=async (req,res) => {
             password:hashedPassword
         })
 
-        const token=await genToken(user._id)
-        res.cookie("token",token,{
+        const token=await genToken(user._id) // create token and put it into cookie
+        res.cookie("token",token,{  //cookie basicaly user ki info basic usmain taki bar bar login na karna pade 
             secure:false,
             sameSite:"strict",
             maxAge:7*24*60*60*1000,
             httpOnly:true
         })
   
-        return res.status(201).json(user)
+        return res.status(201).json(user) //user is created so 201
 
     } catch (error) {
-        return res.status(500).json(`sign up error ${error}`)
+        return res.status(500).json(`sign up error ${error}`) //from server side so 500
     }
 }
 

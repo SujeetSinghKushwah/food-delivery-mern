@@ -17,3 +17,5 @@ const isAuth=async (req,res,next) => {
 }
 
 export default isAuth
+
+// current user ki userId find karne ke liye yeh middleware

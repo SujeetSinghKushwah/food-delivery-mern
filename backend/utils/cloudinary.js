@@ -8,7 +8,7 @@ const uploadOnCloudinary = async (file) => {
     });
     try {
         const result = await cloudinary.uploader.upload(file)
-        fs.unlinkSync(file)
+        fs.unlinkSync(file) // yeh file delete kar deta hai
         return result.secure_url
     } catch (error) {
         fs.unlinkSync(file)
@@ -17,3 +17,5 @@ const uploadOnCloudinary = async (file) => {
 }
 
 export default uploadOnCloudinary
+
+//image wagera ko load karane ke liye cloudinary par store kar ke rakhenge 

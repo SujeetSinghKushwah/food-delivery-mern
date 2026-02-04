@@ -7,7 +7,7 @@ export const createEditShop=async (req,res) => {
        let image;
        if(req.file){
         console.log(req.file)
-        image=await uploadOnCloudinary(req.file.path)
+        image=await uploadOnCloudinary(req.file.path)// yaha se yeh string de dega
        } 
        let shop=await Shop.findOne({owner:req.userId})
        if(!shop){
@@ -15,7 +15,7 @@ export const createEditShop=async (req,res) => {
         name,city,state,address,image,owner:req.userId
        })
        }else{
-         shop=await Shop.findByIdAndUpdate(shop._id,{
+         shop=await Shop.findByIdAndUpdate(shop._id,{ // agar shop hai toh edit karenge
         name,city,state,address,image,owner:req.userId
        },{new:true})
        }
@@ -47,7 +47,7 @@ export const getShopByCity=async (req,res) => {
         const {city}=req.params
 
         const shops=await Shop.find({
-            city:{$regex:new RegExp(`^${city}$`, "i")}
+            city:{$regex:new RegExp(`^${city}$`, "i")} // case bhi likhe lower upper toh bhi pata laga lega
         }).populate('items')
         if(!shops){
             return res.status(400).json({message:"shops not found"})

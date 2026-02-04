@@ -46,9 +46,9 @@ type:{type:String,enum:['Point'],default:'Point'},
 coordinates:{type:[Number],default:[0,0]}
    }
   
-}, { timestamps: true })
+}, { timestamps: true }) // when object is created
 
-userSchema.index({location:'2dsphere'})
+userSchema.index({location:'2dsphere'}) // yeh batayenga ki upper wale ko map ki tarah trit karo
 
 
 const User=mongoose.model("User",userSchema)

@@ -15,7 +15,7 @@ import { useNavigate } from 'react-router-dom';
 import { serverUrl } from '../App';
 import { addMyOrder, setTotalAmount } from '../redux/userSlice';
 function RecenterMap({ location }) {
-  if (location.lat && location.lon) {
+  if (location.lat && location.lon) { // isse map ko recenter karayenge
     const map = useMap()
     map.setView([location.lat, location.lon], 16, { animate: true })
   }
@@ -41,10 +41,10 @@ function CheckOut() {
 
   const onDragEnd = (e) => {
     const { lat, lng } = e.target._latlng
-    dispatch(setLocation({ lat, lon: lng }))
-    getAddressByLatLng(lat, lng)
+    dispatch(setLocation({ lat, lon: lng })) // esse map bhi waha par move ho jayega
+    getAddressByLatLng(lat, lng) // isse jaha move kara waha ka address upper dikhayega or search karenge toh bhi waha par le jaye
   }
-  const getCurrentLocation = () => {
+  const getCurrentLocation = () => { // isse wapas current location par move ho jayega jaha par tume ho
       const latitude=userData.location.coordinates[1]
       const longitude=userData.location.coordinates[0]
       dispatch(setLocation({ lat: latitude, lon: longitude }))
@@ -63,7 +63,7 @@ function CheckOut() {
     }
   }
 
-  const getLatLngByAddress = async () => {
+  const getLatLngByAddress = async () => { // isse search kar ke change ho jayega
     try {
       const result = await axios.get(`https://api.geoapify.com/v1/geocode/search?text=${encodeURIComponent(addressInput)}&apiKey=${apiKey}`)
       const { lat, lon } = result.data.features[0].properties

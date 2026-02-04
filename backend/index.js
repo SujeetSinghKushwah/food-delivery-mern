@@ -1,6 +1,6 @@
 import express from "express"
 import dotenv from "dotenv"
-dotenv.config()
+dotenv.config() // we use which write in .env to avoid info leaked   
 import connectDb from "./config/db.js"
 import cookieParser from "cookie-parser"
 import authRouter from "./routes/auth.routes.js"
@@ -25,17 +25,17 @@ const io=new Server(server,{
 }
 })
 
-app.set("io",io)
+app.set("io",io) // isse io kahi bhi use kar sakte hai
 
 
 
 const port=process.env.PORT || 5000
-app.use(cors({
+app.use(cors({ //kon se url backend access kr sakta hai
     origin:"http://localhost:5173",
     credentials:true
 }))
-app.use(express.json())
-app.use(cookieParser())
+app.use(express.json()) // converting data into json
+app.use(cookieParser()) // easily cookie pass into token
 app.use("/api/auth",authRouter)
 app.use("/api/user",userRouter)
 app.use("/api/shop",shopRouter)

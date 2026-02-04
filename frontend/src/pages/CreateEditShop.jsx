@@ -22,9 +22,9 @@ function CreateEditShop() {
        const [loading,setLoading]=useState(false)
        const dispatch=useDispatch()
        const handleImage=(e)=>{
-        const file=e.target.files[0]
+        const file=e.target.files[0] // yeh complete file backend main bhejna hai
         setBackendImage(file)
-        setFrontendImage(URL.createObjectURL(file))
+        setFrontendImage(URL.createObjectURL(file))//frontend image ke liye url bn jayega
        }
 
        const handleSubmit=async (e)=>{

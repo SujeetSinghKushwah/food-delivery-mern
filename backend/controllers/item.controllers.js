@@ -6,7 +6,7 @@ export const addItem = async (req, res) => {
     try {
         const { name, category, foodType, price } = req.body
         let image;
-        if (req.file) {
+        if (req.file) {// bich main multer laga hai usne koi file access ki hai toh woh daal dega
             image = await uploadOnCloudinary(req.file.path)
         }
         const shop = await Shop.findOne({ owner: req.userId })

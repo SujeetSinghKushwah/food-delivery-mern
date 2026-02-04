@@ -8,7 +8,7 @@ import axios from "axios"
 import { serverUrl } from '../App';
 import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
 import { auth } from '../../firebase';
-import { ClipLoader } from "react-spinners"
+import { ClipLoader } from "react-spinners" // for loading
 import { useDispatch } from 'react-redux';
 import { setUserData } from '../redux/userSlice';
 function SignUp() {
@@ -46,7 +46,7 @@ function SignUp() {
           return setErr("mobile no is required")
         }
         const provider=new GoogleAuthProvider()
-        const result=await signInWithPopup(auth,provider)
+        const result=await signInWithPopup(auth,provider)// isse pop up aayega gmail wala pehle se rehti hai jo
   try {
     const {data}=await axios.post(`${serverUrl}/api/auth/google-auth`,{
         fullName:result.user.displayName,

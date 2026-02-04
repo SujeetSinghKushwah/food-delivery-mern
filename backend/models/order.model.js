@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const shopOrderItemSchema = new mongoose.Schema({
+const shopOrderItemSchema = new mongoose.Schema({ 
     item:{
         type: mongoose.Schema.Types.ObjectId,
         ref: "Item",
@@ -11,7 +11,7 @@ const shopOrderItemSchema = new mongoose.Schema({
     quantity:Number
 }, { timestamps: true })
 
-const shopOrderSchema = new mongoose.Schema({
+const shopOrderSchema = new mongoose.Schema({ // agar alag alag shop se item lete hai toh sab shop ke pass alag alag apna apna jayega 
     shop: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "Shop"
@@ -20,8 +20,8 @@ const shopOrderSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: "User"
     },
-    subtotal: Number,
-    shopOrderItems: [shopOrderItemSchema],
+    subtotal: Number, // sab ke pass apne apne paise jayenge par user toh ek bar hi karenga payment
+    shopOrderItems: [shopOrderItemSchema], // ek jagha se alag alag chize or quatity bhi ho sakti hai toh yeh alag se define kar dete hai
     status:{
         type:String,
         enum:["pending","preparing","out of delivery","delivered"],
@@ -51,7 +51,7 @@ deliveredAt:{
 
 }, { timestamps: true })
 
-const orderSchema = new mongoose.Schema({
+const orderSchema = new mongoose.Schema({ // ismain order kara toh uske sath kya kya detail jalyegi
     user: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "User"
@@ -87,3 +87,5 @@ const orderSchema = new mongoose.Schema({
 
 const Order=mongoose.model("Order",orderSchema)
 export default Order
+
+// controller inmain change backend database main karne ke liye woh sari usmain likhte hai

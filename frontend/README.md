@@ -1,12 +1,32 @@
-# React + Vite
+Vingo | Full-Stack Food Delivery Platform
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Vingo is a high-performance food delivery application built with the MERN stack. It features real-time order tracking, secure payments, and modern authentication flows.
 
-Currently, two official plugins are available:
+Features
+Real-Time Tracking: Live delivery updates using Socket.io and Google Maps.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Secure Payments: Integrated Razorpay gateway for seamless transactions.
 
-## Expanding the ESLint configuration
+Authentication: Google OAuth and JWT-based login with OTP password recovery.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+Management: Full cart system, order history, and restaurant management.
+
+Tech Stack
+Frontend: React.js, Tailwind CSS
+
+Backend: Node.js, Express.js
+
+Database: MongoDB
+
+Real-time: Socket.io
+
+Payments: Razorpay
+
+Setup Instructions
+Clone the repository and install dependencies in both the frontend and backend folders using npm install.
+
+Create a .env file in the backend directory with your MONGODB_URL, JWT_SECRET, and RAZORPAY_KEY.
+
+Start the backend server using npm run dev.
+
+Start the frontend application using npm start.

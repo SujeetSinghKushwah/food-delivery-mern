@@ -23,3 +23,5 @@ fetchShops()
 }
 
 export default useGetShopByCity
+
+// fetch karne ke liye shops hooks main yeh hi sab hai basically

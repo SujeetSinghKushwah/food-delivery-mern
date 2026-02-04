@@ -29,3 +29,4 @@ export const sendDeliveryOtpMail=async (user,otp) => {
         html:`<p>Your OTP for delivery is <b>${otp}</b>. It expires in 5 minutes.</p>`
     })
 }
+  

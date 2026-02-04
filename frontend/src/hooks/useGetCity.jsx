@@ -23,7 +23,7 @@ navigator.geolocation.getCurrentPosition(async (position)=>{
      dispatch(setCurrentAddress(result?.data?.results[0].address_line2 || result?.data?.results[0].address_line1 ))
   dispatch(setAddress(result?.data?.results[0].address_line2))
 })
-    },[userData])
-}
+    },[userData]) /* kab kab change hoga userdata tab tab call karenge*/
+ }
 
 export default useGetCity
