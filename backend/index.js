@@ -1,12 +1,11 @@
 import express from "express"
 import dotenv from "dotenv"
-dotenv.config() // we use which write in .env to avoid info leaked   
+dotenv.config()    
 import connectDb from "./config/db.js"
 import cookieParser from "cookie-parser"
 import authRouter from "./routes/auth.routes.js"
 import cors from "cors"
 import userRouter from "./routes/user.routes.js"
-
 import itemRouter from "./routes/item.routes.js"
 import shopRouter from "./routes/shop.routes.js"
 import orderRouter from "./routes/order.routes.js"
@@ -14,37 +13,57 @@ import http from "http"
 import { Server } from "socket.io"
 import { socketHandler } from "./socket.js"
 
-const app=express()
-const server=http.createServer(app)
+const app = express()
+const server = http.createServer(app)
 
-const io=new Server(server,{
-   cors:{
-    origin:"https://food-delivery-mern-1sq8.onrender.com",
-    credentials:true,
-    methods:['POST','GET']
-}
+// Multiple origins allow karna safe hota hai (Deployment + Local)
+const allowedOrigins = [
+    "https://food-delivery-mern-1sq8.onrender.com",
+    "https://food-delivery-mern-1sq8.onrender.com/", // With trailing slash
+    "http://localhost:5173" // For local testing
+];
+
+// Socket.io configuration
+const io = new Server(server, {
+    cors: {
+        origin: allowedOrigins,
+        credentials: true,
+        methods: ['POST', 'GET']
+    }
 })
 
-app.set("io",io) // isse io kahi bhi use kar sakte hai
+app.set("io", io)
 
-
-
-const port=process.env.PORT || 5000
-app.use(cors({ //kon se url backend access kr sakta hai
-    origin:"https://food-delivery-mern-1sq8.onrender.com",
-    credentials:true
+// Middlewares
+app.use(cors({ 
+    origin: function (origin, callback) {
+        // Allow requests with no origin (like mobile apps or curl requests)
+        if (!origin || allowedOrigins.indexOf(origin) !== -1) {
+            callback(null, true);
+        } else {
+            callback(new Error('Not allowed by CORS'));
+        }
+    },
+    credentials: true
 }))
-app.use(express.json()) // converting data into json
-app.use(cookieParser()) // easily cookie pass into token
-app.use("/api/auth",authRouter)
-app.use("/api/user",userRouter)
-app.use("/api/shop",shopRouter)
-app.use("/api/item",itemRouter)
-app.use("/api/order",orderRouter)
 
+app.use(express.json()) 
+app.use(cookieParser()) 
+
+// Routes
+app.use("/api/auth", authRouter)
+app.use("/api/user", userRouter)
+app.use("/api/shop", shopRouter)
+app.use("/api/item", itemRouter)
+app.use("/api/order", orderRouter)
+
+// Socket Handler
 socketHandler(io)
-server.listen(port,()=>{
-    connectDb()
-    console.log(`server started at ${port}`)
-})
 
+// Render dynamic PORT use karta hai
+const port = process.env.PORT || 5000
+
+server.listen(port, () => {
+    connectDb()
+    console.log(`Server started at ${port}`)
+})
